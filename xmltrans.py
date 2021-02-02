@@ -1,9 +1,14 @@
 #! /usr/bin/env python3
 import os
+import re
 import xml.etree.ElementTree as ET
 
-xmlArrs = {"Saury.xml","Saury-ja-JP.xml",
-        "Saury-ko-KR.xml","Saury-zh-CN.xml",
+xmlArrs = {"Saury.xml",
+        "Saury(en).xml",
+        "Saury-ja-JP.xml",
+        "Saury-ko-KR.xml",
+        "Saury(zh).xml",
+        "Saury-zh-CN.xml",
         "Saury-zh-TW.xml"}
 
 docDirectory = os.getenv("HOME")+"/Documents/"
@@ -12,8 +17,10 @@ print(docDirectory)
 def folderNameSwitcher(arg):
     switcher={
             "Saury.xml":"values",
+            "Saury(en).xml":"values-en",
             "Saury-ja-JP.xml":"values-ja-rJP",
             "Saury-ko-KR.xml":"values-ko-rKR",
+            "Saury(zh).xml":"values-zh",
             "Saury-zh-CN.xml":"values-zh-rCN",
             "Saury-zh-TW.xml":"values-zh-rTW"
             }
@@ -86,8 +93,8 @@ def parseXML(fileName):
     for text in root.findall('./texts/text'):
         key = text.get('name')
         value = text.get('value')
-        if value and not "<br>" in value and key and key != "new" :
-            key  = key.replace("(","").replace(")","").replace(".","_").replace(",","").replace(" ","")
+        if value and not "<br>" in value and key and key != "new" and key != "UserCannotBeDeleted":
+            key  = key.replace("(","").replace(")","").replace(".","_").replace(",","").replace(" ","").replace("{0}","").replace("/","")
             value = initValueByKey(key,value) 
             content += "    <string name=\"" + key + "\">"
             content += value
@@ -95,6 +102,7 @@ def parseXML(fileName):
     return content
 
 def writeFile(fileName,folderName):
+    nameRegex = re.sub('\(.*\)',"",fileName)
     #文件路径
     destFilePath = docDirectory+folderName
     #创建文件夹
@@ -103,7 +111,7 @@ def writeFile(fileName,folderName):
     #编写xml内容
     xmlBuilder = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
     xmlBuilder += "<resources xmlns:tools=\"http://schemas.android.com/tools\" tools:ignore=\"MissingTranslation\">\n\n"
-    xmlBuilder += parseXML(fileName)
+    xmlBuilder += parseXML(nameRegex)
     xmlBuilder += "\n</resources>"
     textFile = open(destFilePath+"/strings.xml","w")
     textFile.write(xmlBuilder)
