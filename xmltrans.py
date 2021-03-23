@@ -7,9 +7,9 @@ xmlArrs = {"Saury.xml",
         "Saury(en).xml",
         "Saury-ja-JP.xml",
         "Saury-ko-KR.xml",
-        "Saury(zh).xml",
+        "Saury(zh)-zh-CN.xml",
         "Saury-zh-CN.xml",
-        "Saury-zh-TW.xml"}
+        "Saury-zh-Hant.xml"}
 
 docDirectory = os.getenv("HOME")+"/Documents/"
 print(docDirectory)
@@ -20,9 +20,9 @@ def folderNameSwitcher(arg):
             "Saury(en).xml":"values-en",
             "Saury-ja-JP.xml":"values-ja-rJP",
             "Saury-ko-KR.xml":"values-ko-rKR",
-            "Saury(zh).xml":"values-zh",
+            "Saury(zh)-zh-CN.xml":"values-zh",
             "Saury-zh-CN.xml":"values-zh-rCN",
-            "Saury-zh-TW.xml":"values-zh-rTW"
+            "Saury-zh-Hant.xml":"values-zh-rTW"
             }
     return switcher.get(arg,"values")
 
@@ -95,7 +95,7 @@ def parseXML(fileName):
         value = text.get('value')
         if value and not "<br>" in value and key and key != "new" and key != "UserCannotBeDeleted":
             key  = key.replace("(","").replace(")","").replace(".","_").replace(",","").replace(" ","").replace("{0}","").replace("/","")
-            value = initValueByKey(key,value) 
+            value = initValueByKey(key,value)
             content += "    <string name=\"" + key + "\">"
             content += value
             content += "</string>\n"
