@@ -4,12 +4,18 @@ import re
 import xml.etree.ElementTree as ET
 
 xmlArrs = {"Saury.xml",
-        "Saury(en).xml",
-        "Saury-ja-JP.xml",
-        "Saury-ko-KR.xml",
-        "Saury(zh)-zh-CN.xml",
-        "Saury-zh-CN.xml",
-        "Saury-zh-Hant.xml"}
+           "Saury(en).xml",
+           "Saury-ja-JP.xml",
+           "Saury-ko-KR.xml",
+           "Saury(zh)-zh-CN.xml",
+           "Saury-zh-CN.xml",
+           "Saury-zh-Hant.xml",
+           "Saury-ar.xml",
+           "Saury-de.xml",
+           "Saury-es.xml",
+           "Saury-fr.xml",
+           "Saury-hi.xml",
+           "Saury-ru.xml"}
 
 docDirectory = os.getenv("HOME")+"/Documents/"
 print(docDirectory)
@@ -22,7 +28,13 @@ def folderNameSwitcher(arg):
             "Saury-ko-KR.xml":"values-ko-rKR",
             "Saury(zh)-zh-CN.xml":"values-zh",
             "Saury-zh-CN.xml":"values-zh-rCN",
-            "Saury-zh-Hant.xml":"values-zh-rTW"
+            "Saury-zh-Hant.xml":"values-zh-rTW",
+            "Saury-ar.xml":"values-ar",
+            "Saury-de.xml":"values-de",
+            "Saury-es.xml":"values-es",
+            "Saury-fr.xml":"values-fr",
+            "Saury-hi.xml":"values-hi",
+            "Saury-ru.xml":"values-ru"
             }
     return switcher.get(arg,"values")
 
