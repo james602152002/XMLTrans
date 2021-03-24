@@ -105,7 +105,7 @@ def parseXML(fileName):
     for text in root.findall('./texts/text'):
         key = text.get('name')
         value = text.get('value')
-        if value and not "<br>" in value and key and key != "new" and key != "UserCannotBeDeleted":
+        if value and not "<br>" in value and key and key != "new" and key != "UserCannotBeDeleted" and key != "ChatUserSearch_Hint":
             key  = key.replace("(","").replace(")","").replace(".","_").replace(",","").replace(" ","").replace("{0}","").replace("/","")
             value = initValueByKey(key,value)
             content += "    <string name=\"" + key + "\">"
