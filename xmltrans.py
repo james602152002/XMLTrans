@@ -75,7 +75,8 @@ def isNoColor(key):
             "SecondsAgo":True,
             "YouStillHaveOtherCnt":True,
             "PasswordComplexity_MinLength_Hint":True,
-            "PasswordComplexity_MaxLength_Hint":True
+            "PasswordComplexity_MaxLength_Hint":True,
+            "AccountBankCnt":True
         }
     return  switcher.get(key, False)
 
