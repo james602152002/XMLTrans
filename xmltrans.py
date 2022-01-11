@@ -80,6 +80,15 @@ def isNoColor(key):
         }
     return  switcher.get(key, False)
 
+def isPass(key):
+    switcher={
+        "Pages_Executive_AssetsManagement":False,
+        "new":False,
+        "UserCannotBeDeleted":False,
+        "ChatUserSearch_Hint":False
+    }
+    return switcher.get(key, True)
+
 def initValueByKey(key, value):
     filterValue = value.replace("&","&amp;").replace("'","\\'")
     #忘记密码？ {0}.
@@ -106,7 +115,7 @@ def parseXML(fileName):
     for text in root.findall('./texts/text'):
         key = text.get('name')
         value = text.get('value')
-        if value and not "<br>" in value and key and key != "new" and key != "UserCannotBeDeleted" and key != "ChatUserSearch_Hint":
+        if value and not "<br>" in value and key and isPass(key):
             key  = key.replace("(","").replace(")","").replace(".","_").replace(",","").replace(" ","").replace("{0}","").replace("/","")
             value = initValueByKey(key,value)
             content += "    <string name=\"" + key + "\">"
