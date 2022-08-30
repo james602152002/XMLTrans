@@ -117,7 +117,7 @@ def parseXML(fileName):
         value = text.get('value')
         value = value.replace("<","&lt;").replace(">","&gt;")
         if value and not "<br>" in value and key and isPass(key):
-            key  = key.replace("(","").replace(")","").replace(".","_").replace(",","").replace(" ","").replace("{0}","").replace("/","").replace("!","")
+            key  = key.replace("(","").replace(")","").replace(".","_").replace('-','_').replace(",","").replace(" ","").replace("{0}","").replace("/","").replace("!","")
             value = initValueByKey(key,value)
             content += "    <string name=\"" + key + "\">"
             content += value
