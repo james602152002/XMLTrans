@@ -76,7 +76,8 @@ def isNoColor(key):
             "YouStillHaveOtherCnt":True,
             "PasswordComplexity_MinLength_Hint":True,
             "PasswordComplexity_MaxLength_Hint":True,
-            "AccountBankCnt":True
+            "AccountBankCnt":True,
+            "ConflictDetactResults":True,
         }
     return  switcher.get(key, False)
 
@@ -118,7 +119,7 @@ def parseXML(fileName):
         value = value.replace("<","&lt;").replace(">","&gt;")
         value = value.replace("\\'","")
         if value and not "<br>" in value and key and isPass(key):
-            key  = key.replace("(","").replace(")","").replace(".","_").replace('-','_').replace(",","").replace(" ","").replace("{0}","").replace("/","").replace("!","").replace(":","ASCIICOLON").replace("0","zero__").replace("'","").replace("&","ASCIIAND")
+            key  = key.replace("(","").replace(")","").replace(".","_").replace('-','_').replace(",","").replace(" ","").replace("{0}","").replace("/","").replace("!","").replace(":","ASCIICOLON").replace("0","zero__").replace("'","").replace("&","ASCIIAND").replace("%","ASCIIPERCENT")
             value = initValueByKey(key,value)
             content += "    <string name=\"" + key + "\">"
             content += value
