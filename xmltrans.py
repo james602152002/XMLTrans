@@ -79,6 +79,7 @@ def isNoColor(key):
             "AccountBankCnt":True,
             "ConflictDetactResults":True,
             "PlzSelect":True,
+            "MinValueBusinessCard":True,
         }
     return  switcher.get(key, False)
 
@@ -120,7 +121,11 @@ def parseXML(fileName):
         value = value.replace("<","&lt;").replace(">","&gt;")
         value = value.replace("\\'","")
         if value and not "<br>" in value and key and isPass(key):
-            key  = key.replace("_","ASCIIUNDERLINE").replace("appASCIIUNDERLINEname","app_name").replace("toastASCIIUNDERLINEinternetASCIIUNDERLINErequestASCIIUNDERLINEtimeASCIIUNDERLINEout","toast_internet_request_time_out").replace(".","_").replace('-','_').replace(",","").replace(" ","").replace("{0}","").replace("/","").replace("!","").replace(":","ASCIICOLON").replace("0","zero__").replace("'","").replace("&","ASCIIAND").replace("%","ASCIIPERCENT").replace("5","five__").replace("(","ASCIILBRACE").replace(")","ASCIIRBRACE")
+            key  = key.replace("_","ASCIIUNDERLINE").replace("appASCIIUNDERLINEname","app_name").replace("toastASCIIUNDERLINEinternetASCIIUNDERLINErequestASCIIUNDERLINEtimeASCIIUNDERLINEout","toast_internet_request_time_out").replace(".","_").replace('-','_').replace(",","").replace(" ","").replace("{0}","").replace("/","").replace("!","").replace(":","ASCIICOLON").replace("'","").replace("&","ASCIIAND").replace("%","ASCIIPERCENT").replace("(","ASCIILBRACE").replace(")","ASCIIRBRACE")
+            #key = key.replace("0","zero__").replace("5","five__")
+            isNumber = re.match("^(\d+).*", key)
+            if isNumber:
+                key = "Number__" + key
             value = initValueByKey(key,value)
             content += "    <string name=\"" + key + "\">"
             content += value
