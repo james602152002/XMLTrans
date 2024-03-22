@@ -80,6 +80,8 @@ def isNoColor(key):
             "ConflictDetactResults":True,
             "PlzSelect":True,
             "MinValueBusinessCard":True,
+            "ValidateMinValue":True,
+            "HintTableTotalCount":True,
         }
     return  switcher.get(key, False)
 
